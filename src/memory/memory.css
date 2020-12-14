@@ -1,11 +1,19 @@
+.freeze {
+  pointer-events: none;
+}
 #memory {
+  max-width: 1024px;
+  max-height: 768px;
+  padding: 32px 16px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+#memory .wrapper {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   /* grid-template-rows: repeat(auto-fit, minmax(200px, 200px)); */
   grid-auto-rows: 1fr;
   gap: 1rem;
-  padding: 4vh;
-  height: 80vh;
 }
 #memory .card::before {
   content: "";
@@ -17,4 +25,14 @@
 #memory .front,
 #memory .back {
   pointer-events: none !important;
+}
+
+#memory .flipped .front,
+#memory .flipped .back {
+  filter: grayscale(1);
+}
+
+#memory footer {
+  padding-top: 24px;
+  text-align: center;
 }
