@@ -1,0 +1,20 @@
+#memory {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  /* grid-template-rows: repeat(auto-fit, minmax(200px, 200px)); */
+  grid-auto-rows: 1fr;
+  gap: 1rem;
+  padding: 4vh;
+  height: 80vh;
+}
+#memory .card::before {
+  content: "";
+  padding-bottom: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#memory .front,
+#memory .back {
+  pointer-events: none !important;
+}
