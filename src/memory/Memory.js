@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { Fragment, useState, useEffect, useRef } from "react";
 import "./memory.css";
 import { MemoryGame } from "./memory-game";
@@ -7,8 +8,16 @@ const Memory = ({ children, level = 1 }) => {
   const [gameDeck, setGameDeck] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [matchesStack, setMatchesStack] = useState([]);
+  const [columnSize, setColumnSize] = useState(0);
+  const rowSize = 3;
+  const deck = {
+    1: 24,
+    2: 36,
+    3: 48,
+  };
 
   const refContainer = useRef();
+  const wrapperContainer = useRef("#wrapper");
 
   const getGameDeck = async () => {
     const newGameDeck = await MemoryGame.init(level);
@@ -45,6 +54,9 @@ const Memory = ({ children, level = 1 }) => {
 
   useEffect(() => {
     getGameDeck();
+    const ref$ = wrapperContainer.current;
+    ref$.style.gridTemplateColumns = `repeat(${deck[level] / rowSize}, 1fr)`;
+    console.log(wrapperContainer.current.style.gridTemplateColumns);
     setIsLoading((t) => !t);
   }, []);
 
@@ -62,7 +74,7 @@ const Memory = ({ children, level = 1 }) => {
         <header>
           <h1>Memory Game</h1>
         </header>
-        <div className="wrapper">
+        <div className="wrapper" ref={wrapperContainer}>
           {gameDeck.map((face, idx) => {
             return (
               <FlipCard key={idx} type={face}>

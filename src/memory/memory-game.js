@@ -60,7 +60,7 @@ export const MemoryGame = Object.freeze({
     3: 48,
   },
 
-  init(level = 1) {
+  init(level = 2) {
     const deckSize = !!level && level <= 3 ? this.deck[level] : this.deck["1"];
     return new Promise((resolve, reject) => {
       const playDeck = initDeck(deckSize);
